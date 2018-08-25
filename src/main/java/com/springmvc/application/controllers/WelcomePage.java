@@ -1,6 +1,7 @@
 package com.springmvc.application.controllers;
 
 import com.springmvc.application.helpers.Student;
+import com.springmvc.application.helpers.StudentNameParser;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,7 @@ public class WelcomePage {
         binder.setDisallowedFields(new String[] {"studentMobile"});         //  the mobile number will not be binded
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy****MM****dd");     // allows customization of the dates format  <---- This is custom property editor classes
         binder.registerCustomEditor(Date.class, "studentDOB", new CustomDateEditor(dateFormat, false));
+        binder.registerCustomEditor(String.class, "studentName", new StudentNameParser());
     }
 
 
