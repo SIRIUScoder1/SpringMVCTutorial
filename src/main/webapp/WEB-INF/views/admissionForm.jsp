@@ -33,8 +33,23 @@
                      </select>
 				</td>
 			</tr>
+		</table>
+		<table>
+			<tr>
+				<td>
+					Student's Address :
+				</td>
+			</tr>
+			<tr>
+				<td> Country: <input type="text" name="studentAddress.country"></td>
+				<td> City: <input type="text" name="studentAddress.city"></td>
+				<td> Street: <input type="text" name="studentAddress.street"></td>
+				<td> Pincode: <input type="text" name="studentAddress.pincode"></td>
+			</tr>
 			<tr> <td><input type="submit" value="Submit Form" /> </td></tr>
 		</table>
+
+
 	</form>
 </body>
 </html>

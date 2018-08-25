@@ -22,7 +22,16 @@
 		${student.studentDOB}
 	</h2>
 	<h2>
-		${student.studentSkills}
+		${student.studentAddress.country}
+	</h2>
+	<h2>
+		${student.studentAddress.city}
+	</h2>
+	<h2>
+		${student.studentAddress.street}
+	</h2>
+	<h2>
+		${student.studentAddress.pincode}
 	</h2>
 </body>
 </html>
