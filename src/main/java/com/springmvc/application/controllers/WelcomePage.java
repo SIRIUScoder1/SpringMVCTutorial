@@ -25,14 +25,13 @@ public class WelcomePage {
      */
     @InitBinder
     public void intBinder(WebDataBinder binder) {
-        binder.setDisallowedFields(new String[] {"studentMobile"});         //  the mobile number will not be binded
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy****MM****dd");     // allows customization of the dates format  <---- This is custom property editor classes
         binder.registerCustomEditor(Date.class, "studentDOB", new CustomDateEditor(dateFormat, false));
         binder.registerCustomEditor(String.class, "studentName", new StudentNameParser());
     }
 
 
-    @RequestMapping(value = "/addmissionForm", method = RequestMethod.GET)
+    @RequestMapping(value = "/admissionForm", method = RequestMethod.GET)
     public ModelAndView admissionFormPage(final HttpServletRequest request, final HttpServletResponse response) {
         ModelAndView admissionFormModel = new ModelAndView("admissionForm");
         return admissionFormModel;
@@ -46,7 +45,9 @@ public class WelcomePage {
          *  and including small snippet below
          */
         if(result.hasErrors()) {
-            // execute something.
+            System.out.println("Has Errors");
+            ModelAndView errorsView = new ModelAndView("admissionForm");
+            return errorsView;
         }
 
         ModelAndView submitAdmissionForm = new ModelAndView("admissionSuccess");
