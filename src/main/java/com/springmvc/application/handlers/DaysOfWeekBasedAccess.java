@@ -43,7 +43,7 @@ public class DaysOfWeekBasedAccess extends HandlerInterceptorAdapter {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
 
-        System.out.println("HandlerInterceptorAdaptor : postHandle called " + request.getRequestURI().toString());
+//        System.out.println("HandlerInterceptorAdaptor : postHandle called " + request.getRequestURI().toString());
     }
 
     /**
@@ -56,6 +56,6 @@ public class DaysOfWeekBasedAccess extends HandlerInterceptorAdapter {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
                                 Exception ex) throws Exception {
-        System.out.println("HandlerInterceptorAdaptor : afterCompletion called " + request.getRequestURI().toString());
+//        System.out.println("HandlerInterceptorAdaptor : afterCompletion called " + request.getRequestURI().toString());
     }
 }

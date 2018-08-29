@@ -6,15 +6,13 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Controller
@@ -52,5 +50,23 @@ public class WelcomePage {
 
         ModelAndView submitAdmissionForm = new ModelAndView("admissionSuccess");
         return submitAdmissionForm;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/students", method = RequestMethod.GET)
+    public ArrayList<Student> getStudentList() {
+        Student student1 = new Student();
+        student1.setStudentName("Karan");
+        Student student2 = new Student();
+        student2.setStudentName("Arab");
+        Student student3 = new Student();
+        student3.setStudentName("Sam");
+        ArrayList<Student> studentArrayList = new ArrayList<>();
+        studentArrayList.add(student1);
+        studentArrayList.add(student2);
+        studentArrayList.add(student3);
+        // this is java object Array list we need to convert this to json Object.
+        // jackson converts into it json format.
+        return studentArrayList;
     }
 }
