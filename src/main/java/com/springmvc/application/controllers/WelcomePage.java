@@ -52,6 +52,10 @@ public class WelcomePage {
         return submitAdmissionForm;
     }
 
+    /**
+     * REST API : Students added in the list and returning a JSON object
+     * of the list.
+     */
     @ResponseBody
     @RequestMapping(value = "/students", method = RequestMethod.GET)
     public ArrayList<Student> getStudentList() {
@@ -68,5 +72,20 @@ public class WelcomePage {
         // this is java object Array list we need to convert this to json Object.
         // jackson converts into it json format.
         return studentArrayList;
+    }
+
+    /**
+     * REST API : Retrieving a single student record
+     *
+     * @PathVariable extracts the variable under in the curly braces.
+     */
+    @ResponseBody
+    @RequestMapping(value = "/students/{name}", method = RequestMethod.GET)
+    public Student getStudent(@PathVariable("name") String studentName) {
+        // Examplefetch the studentName details from the some place like DB using argument passed
+        Student student = new Student();
+        student.setStudentName(studentName);
+        student.setStudentHobby("WWE");
+        return student;
     }
 }
