@@ -1,6 +1,7 @@
 package com.springmvc.application.controllers;
 
 import com.springmvc.application.helpers.Student;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -14,8 +15,11 @@ public class StudentInfoRESTAPI {
     /**
      * REST API : Students added in the list and returning a JSON object
      * of the list.
+     *
+     * produces in @RequestMapping allows the sender to send data in a specific format
+     * xml or json
      */
-    @RequestMapping(value = "/students", method = RequestMethod.GET)
+    @RequestMapping(value = "/students", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
     public ArrayList<Student> getStudentList() {
         Student student1 = new Student();
         student1.setStudentName("Karan");
@@ -44,5 +48,23 @@ public class StudentInfoRESTAPI {
         student.setStudentName(studentName);
         student.setStudentHobby("WWE");
         return student;
+    }
+
+    /**
+     * @RequestBody allows conversion of json/xml into java based object
+     * consume allows to consume only a specific json/xml format (depends on what you specified.)
+     * @param studentName
+     * @param student
+     * @return
+     */
+    @RequestMapping(value = "/students/{name}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
+    public boolean updateStudent(@PathVariable("name") String studentName, @RequestBody Student student) {
+
+        // matching the studentName with database
+        //update the matching the student information also
+        System.out.println(studentName);
+        System.out.println(student.getStudentName() + " " + student.getStudentHobby());
+
+        return true;
     }
 }
