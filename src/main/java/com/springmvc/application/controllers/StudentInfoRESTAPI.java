@@ -1,10 +1,12 @@
 package com.springmvc.application.controllers;
 
 import com.springmvc.application.helpers.Student;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.ArrayList;
 
@@ -54,22 +56,49 @@ public class StudentInfoRESTAPI {
 
     /**
      * @RequestBody allows conversion of json/xml into java based object
-     * consume allows to consume only a specific json/xml format (depends on what you specified.)
+     * consumes allows to consume only a specific json/xml format (depends on what you specified.)
      * @param studentName
      * @param student
      * @return
      */
-    @RequestMapping(value = "/students/{name}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<Void> updateStudent(@PathVariable("name") String studentName, @RequestBody Student student) {
+    @RequestMapping(value = "/students/{name}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> updateStudent(@PathVariable("name") String studentName, @RequestBody Student student) {
 
         // matching the studentName with database
         //update the matching the student information also
         System.out.println(studentName);
         System.out.println(student.getStudentName() + " " + student.getStudentHobby());
 
-        return new ResponseEntity<Void>(HttpStatus.OK); // making status code according to your usecase
+        //return new ResponseEntity<Void>(HttpStatus.OK); // making status code according to your usecase
         /**
          *  If ResponseEntity<Boolean>(true,HttpStatus.OK) ---> sends a response body as well as status through rest api
+         *
+         *  Sending customized response headers.
          */
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("key1","value1");
+        httpHeaders.add("key2","value2");
+        return new ResponseEntity<Boolean>(true, httpHeaders, HttpStatus.OK);
+    }
+
+    /**
+     * POST REST API --> neads to insert some new information to server and then for reading we can use a
+     * GET type of REST API.
+     */
+    @RequestMapping(value = "/students", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> postStudent(@RequestBody Student student) {
+        System.out.println(student.getStudentName() + " " + student.getStudentHobby());
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("location", ServletUriComponentsBuilder.fromCurrentRequest()
+                                                            .path("/{name}")
+                                                            .buildAndExpand(student.getStudentName()).toUri().toString());
+        return new ResponseEntity<Boolean>(true,httpHeaders,HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/students/{name}", method = RequestMethod.DELETE)
+    public ResponseEntity<Boolean> deleteStudent(@PathVariable("name") String studentName) {
+        System.out.println(studentName);
+        // delete this record with studentName
+        return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 }
