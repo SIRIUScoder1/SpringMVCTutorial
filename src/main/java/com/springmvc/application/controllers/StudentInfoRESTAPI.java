@@ -1,7 +1,9 @@
 package com.springmvc.application.controllers;
 
 import com.springmvc.application.helpers.Student;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -58,13 +60,16 @@ public class StudentInfoRESTAPI {
      * @return
      */
     @RequestMapping(value = "/students/{name}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
-    public boolean updateStudent(@PathVariable("name") String studentName, @RequestBody Student student) {
+    public ResponseEntity<Void> updateStudent(@PathVariable("name") String studentName, @RequestBody Student student) {
 
         // matching the studentName with database
         //update the matching the student information also
         System.out.println(studentName);
         System.out.println(student.getStudentName() + " " + student.getStudentHobby());
 
-        return true;
+        return new ResponseEntity<Void>(HttpStatus.OK); // making status code according to your usecase
+        /**
+         *  If ResponseEntity<Boolean>(true,HttpStatus.OK) ---> sends a response body as well as status through rest api
+         */
     }
 }
