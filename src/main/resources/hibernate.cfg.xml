@@ -7,7 +7,7 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">rambo123)(*</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</property>
-        <property name="hibernate.connection.pool_size">1</property>
+        <property name="hibernate.connection.pool_size">3</property>
         <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 
         <property name="show_sql">true</property>

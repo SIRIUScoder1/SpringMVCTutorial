@@ -12,12 +12,14 @@ import java.util.Date;
  * @Id It is use to specify the primary key.
  *
  * @Table allows the table name which is needed to be accessed.
+ *
+ * GenerationType.AUTO, GenerationType.IDENTITY, GenerationType.SEQUENCE
  */
 @Entity
 @Table(name = "STUDENT_INFORMATION")
 public class StudentInfo {
 
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="RollNo")
     private int rollNo;
 

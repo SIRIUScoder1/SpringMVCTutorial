@@ -11,13 +11,19 @@ public class HibernateTest {
 
     public static void main(String[] args) {
         StudentInfo studentInfo1 = new StudentInfo();
-        studentInfo1.setName("temp");
-        studentInfo1.setRollNo(2);
+        studentInfo1.setName("Karan");
         studentInfo1.setBirthddate(new Date());
+
+        StudentInfo studentInfo2 = new StudentInfo();
+        studentInfo2.setName("Sam");
+        studentInfo2.setBirthddate(new Date());
+
+
         SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(StudentInfo.class).buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(studentInfo1);
+        session.save(studentInfo2);
         session.getTransaction().commit();
         session.close();
 
