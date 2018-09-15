@@ -1,5 +1,6 @@
 package com.springmvc.application.HibernateTest;
 
+import com.springmvc.application.helpers.StudentDetailsTable;
 import com.springmvc.application.helpers.StudentInfo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,18 +13,18 @@ public class HibernateTest {
     public static void main(String[] args) {
         StudentInfo studentInfo1 = new StudentInfo();
         studentInfo1.setName("Karan");
-        studentInfo1.setBirthddate(new Date());
 
-        StudentInfo studentInfo2 = new StudentInfo();
-        studentInfo2.setName("Sam");
-        studentInfo2.setBirthddate(new Date());
+        StudentDetailsTable studentDetailsTable = new StudentDetailsTable();
+        studentDetailsTable.setMobileNumber("9417373670");
 
+        // setting the studentInfo to student Detail object
+        studentDetailsTable.setStudentInfo(studentInfo1);
 
-        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(StudentInfo.class).buildSessionFactory();
+        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(StudentInfo.class)
+                    .addAnnotatedClass(StudentDetailsTable.class).buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(studentInfo1);
-        session.save(studentInfo2);
+        session.save(studentDetailsTable);      // Insert the records in both tables.
         session.getTransaction().commit();
         session.close();
 
