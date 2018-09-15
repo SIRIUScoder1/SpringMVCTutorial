@@ -17,6 +17,7 @@ public class HibernateTest {
         StudentDetailsTable studentDetailsTable = new StudentDetailsTable();
         studentDetailsTable.setMobileNumber("9417373670");
 
+        studentInfo1.setStudentDetailsTable(studentDetailsTable);
         // setting the studentInfo to student Detail object
         studentDetailsTable.setStudentInfo(studentInfo1);
 
@@ -24,7 +25,7 @@ public class HibernateTest {
                     .addAnnotatedClass(StudentDetailsTable.class).buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(studentDetailsTable);      // Insert the records in both tables.
+        session.save(studentInfo1);      // Insert the records in both tables.
         session.getTransaction().commit();
         session.close();
 

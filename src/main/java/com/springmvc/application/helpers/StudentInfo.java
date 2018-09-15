@@ -27,6 +27,19 @@ public class StudentInfo {
     @Column(name="Name", nullable = false)      // the column cannot be null.
     private String name;
 
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Id")
+    private StudentDetailsTable studentDetailsTable;
+
+    public StudentDetailsTable getStudentDetailsTable() {
+        return studentDetailsTable;
+    }
+
+    public void setStudentDetailsTable(StudentDetailsTable studentDetailsTable) {
+        this.studentDetailsTable = studentDetailsTable;
+    }
+
     public int getStudentId() {
         return studentId;
     }
