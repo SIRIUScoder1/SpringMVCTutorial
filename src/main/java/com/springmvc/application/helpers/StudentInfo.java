@@ -18,41 +18,36 @@ import java.util.Date;
 @Entity
 @Table(name = "STUDENT")
 public class StudentInfo {
+    @Id
+    @GeneratedValue
+    private int student_id;
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="Id")
-    private int studentId;
+    private String student_name;
 
-    // @Transient can help in not considering a particular column for database only
-    @Column(name="Name", nullable = false)      // the column cannot be null.
-    private String name;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private StudentAddress studentAddress;
 
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Id")
-    private StudentDetailsTable studentDetailsTable;
-
-    public StudentDetailsTable getStudentDetailsTable() {
-        return studentDetailsTable;
+    public void setStudentAddress(StudentAddress studentAddress) {
+        this.studentAddress = studentAddress;
     }
 
-    public void setStudentDetailsTable(StudentDetailsTable studentDetailsTable) {
-        this.studentDetailsTable = studentDetailsTable;
+    public StudentAddress getStudentAddress() {
+        return studentAddress;
     }
 
-    public int getStudentId() {
-        return studentId;
+    public void setStudent_id(int student_id) {
+        this.student_id = student_id;
     }
 
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
+    public int getStudent_id() {
+        return student_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStudent_name(String student_name) {
+        this.student_name = student_name;
     }
 
-    public String getName() {
-        return name;
+    public String getStudent_name() {
+        return student_name;
     }
 }
